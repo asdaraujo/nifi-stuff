@@ -1,0 +1,36 @@
+= nifi-docker-compose
+
+The link:https://hub.docker.com/r/apache/nifi[Apache NiFi Docker image] is a pretty handy way to quickly launch a single-node NiFi cluster.
+
+This docker-compose configuration file uses the NiFi docker image to launch a 2-node NiFi cluster.
+The NiFi configuration and repositories are persisted in Docker volumes, so they survive cluster restarts.
+
+The cluster is configured to use the `single-user` provider and authorizer. The default credentials are `admin/supersecret1`. You can change this in the configuration file if needed.
+
+== Starting the cluster
+
+Execute the following command on this directory:
+
+[source,shell]
+----
+docker compose up -d
+----
+
+== Stopping the cluster
+
+Execute the following command on this directory:
+
+[source,shell]
+----
+docker compose down
+----
+
+== Resetting the cluster content
+
+If you want to clear/discard the content of your NiFi cluster so that you can start a fresh one, execute the following commands on this directory:
+
+[source,shell]
+----
+docker compose down
+docker volume rm $(docker volume ls -q --filter "name=nifi-docker-compose")
+----
