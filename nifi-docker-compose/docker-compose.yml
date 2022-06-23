@@ -21,7 +21,7 @@ x-nifi-environment: &nifi-environment
   NIFI_ELECTION_MAX_CANDIDATES: 1
   NIFI_SENSITIVE_PROPS_KEY: "my-random-string"
   NIFI_CLUSTER_NODE_PROTOCOL_PORT: 8082
-  NIFI_WEB_PROXY_HOST: "nifi0:8443,nifi0,nifi1:8443,nifi1"
+  NIFI_WEB_PROXY_HOST: "nifi0:8443,nifi0,nifi1:8443,nifi1,localhost:8080"
   SINGLE_USER_CREDENTIALS_USERNAME: *user
   SINGLE_USER_CREDENTIALS_PASSWORD: *pwd
   NIFI_SECURITY_USER_AUTHORIZER: "single-user-authorizer"
@@ -62,6 +62,19 @@ services:
     user: root
     entrypoint: ["bash", "-c", "/opt/nifi-toolkit/*/bin/tls-toolkit.sh standalone -o /opt/certs -n nifi[0-1] -P supersecrettruststore -K supersecretkeystore -S supersecretkeystore; chown -R nifi:nifi /opt/certs"]
 
+  proxy:
+    image: nginx:latest
+    container_name: proxy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8443:8443"
+    networks:
+      - nifi
+    depends_on:
+      - nifi0
+      - nifi1
+
   nifi0:
     <<: *nifi-base
     container_name: nifi0
@@ -81,10 +94,6 @@ services:
     environment:
       <<: *nifi-environment
       <<: *nifi0-environment
-    expose:
-      - 8443
-    ports:
-      - 8443:8443
     networks:
       - nifi
 
