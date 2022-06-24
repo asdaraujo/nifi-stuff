@@ -1,5 +1,6 @@
 = nifi-docker-compose
-Based on an original idea from link:https://community.cloudera.com/t5/user/viewprofilepage/user-id/98373[@Arqui] in this link:https://community.cloudera.com/t5/Support-Questions/NiFi-single-user-Certificate-and-Token-not-found/m-p/345007/highlight/true#M234326[community forum post].
+
+_Based on an original idea from link:https://community.cloudera.com/t5/user/viewprofilepage/user-id/98373[@Arqui] in this link:https://community.cloudera.com/t5/Support-Questions/NiFi-single-user-Certificate-and-Token-not-found/m-p/345007/highlight/true#M234326[community forum post]._
 
 The link:https://hub.docker.com/r/apache/nifi[Apache NiFi Docker image] is a pretty handy way to quickly launch a single-node NiFi cluster.
 
