@@ -7,6 +7,8 @@ The NiFi configuration and repositories are persisted in Docker volumes, so they
 
 The cluster is configured to use the `single-user` provider and authorizer. The default credentials are `admin/supersecret1`. You can change this in the configuration file if needed.
 
+A `nginx` service is also part of the deployment to distribute connections to both NiFi nodes. To connect to the cluster, point your browser to `https://localhost:8443/nifi`.
+
 == Starting the cluster
 
 Execute the following command on this directory:
