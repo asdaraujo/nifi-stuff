@@ -96,6 +96,10 @@ services:
       <<: *nifi0-environment
     networks:
       - nifi
+    entrypoint:
+      - "/bin/bash"
+      - "-c"
+      - "sed -i 's/nifi.ui.banner.text=.*/nifi.ui.banner.text=nifi0 (v1.16.2)/' conf/nifi.properties; ../scripts/start.sh"
 
   nifi1:
     <<: *nifi-base
@@ -118,6 +122,10 @@ services:
       <<: *nifi1-environment
     networks:
       - nifi
+    entrypoint:
+      - "/bin/bash"
+      - "-c"
+      - "sed -i 's/nifi.ui.banner.text=.*/nifi.ui.banner.text=nifi1 (v1.16.2)/' conf/nifi.properties; ../scripts/start.sh"
 
 networks:
   nifi:
