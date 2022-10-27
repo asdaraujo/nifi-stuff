@@ -1,3 +1,6 @@
+%YAML 1.1
+---
+
 version: '3.9'
 
 x-user: &user admin
